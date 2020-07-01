@@ -1,0 +1,8 @@
+app/fe/build
+app/fe/node_modules
+app/be/old/node_modules
+app/fe/package-lock.json
+app/be/package-lock.json
+app/telethon/__pycache__
+app/vk/lib/vk/__pycache__
+state

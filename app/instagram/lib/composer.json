@@ -1,0 +1,11 @@
+{
+    "repositories":[
+        {
+            "type": "path",
+            "url": "/usr/local/tgui/instagram/lib/pkg/mgp25/instagram-php"
+        }
+    ],
+    "require": {
+        "teleparser/instagram": "@dev"
+    }
+}

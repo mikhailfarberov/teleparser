@@ -1,0 +1,60 @@
+version: "3"
+services:
+  ui:
+    build:
+      context: .
+      dockerfile: docker/ui/Dockerfile
+    image: "socslns/teleparser/ui:latest"
+    ports:
+      - "8000:80"
+    volumes:
+      - "./state/redis:/var/lib/redis"
+      - "./state/sqlite:/var/db/sqlite"
+      - "./state/downloads:/usr/local/tgui/downloads"
+      - "./state/auth.conf:/etc/nginx/auth.conf"
+    environment:
+      box: "prod"
+      TZ: "Europe/Moscow"
+      PYTHONIOENCODING: "utf-8"
+  tg:
+    build:
+      context: .
+      dockerfile: docker/tg/Dockerfile
+    image: "socslns/teleparser/tg:latest"
+    volumes:
+      - "./state/telegram:/usr/local/tgui/telethon/state"
+      - "./state/downloads:/usr/local/tgui/downloads"
+    depends_on:
+      - ui
+    environment:
+      box: "prod"
+      TZ: "Europe/Moscow"
+      PYTHONIOENCODING: "utf-8"
+  ig:
+    build:
+      context: .
+      dockerfile: docker/ig/Dockerfile
+    image: "socslns/teleparser/ig:latest"
+    volumes:
+      - "./state/instagram:/usr/local/tgui/instagram/state"
+      - "./state/downloads:/usr/local/tgui/downloads"
+    depends_on:
+      - ui
+    environment:
+      box: "prod"
+      TZ: "Europe/Moscow"
+      PYTHONIOENCODING: "utf-8"
+  vk:
+    build:
+      context: .
+      dockerfile: docker/vk/Dockerfile
+    image: "socslns/teleparser/vk:latest"
+    volumes:
+      - "./state/vk:/usr/local/tgui/vk/state"
+      - "./state/downloads:/usr/local/tgui/downloads"
+    depends_on:
+      - ui
+    environment:
+      box: "prod"
+      TZ: "Europe/Moscow"
+      PYTHONIOENCODING: "utf-8"

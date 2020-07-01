@@ -1,0 +1,128 @@
+.paginationItemStyle .page-link {
+  color: #28a745; }
+
+.tableRowStyle:hover {
+  background-color: #e8fae8;
+  cursor: pointer; }
+
+.page-item.active .page-link {
+  background-color: #28a745;
+  border-color: #28a745; }
+
+.example-appear {
+  opacity: 0.01; }
+
+.example-appear.example-appear-active {
+  opacity: 1;
+  transition: opacity .5s ease-in; }
+
+.container {
+  max-width: inherit; }
+
+.row-header {
+  border-top-width: unset;
+  border-top-style: unset;
+  border-top-color: unset;
+  font-size: 1.45em;
+  font-weight: 300; }
+
+.row-step {
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: #dee2e6; }
+  .row-step:hover {
+    background-color: #e8fae8;
+    cursor: pointer; }
+
+.row-chunk {
+  margin-right: 50px;
+  margin-left: 50px;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: #dee2e6; }
+
+[class*="col-"] {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 7px;
+  padding-right: 7px; }
+
+.col-table {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 7px;
+  padding-right: 7px; }
+
+.card label {
+  margin-bottom: unset;
+  margin-left: 20px;
+  margin-right: 10px; }
+
+.submit-button {
+  margin-left: 20px; }
+
+.card-incident {
+  box-shadow: unset;
+  margin-bottom: unset; }
+
+.pagination-incident {
+  margin-bottom: unset; }
+
+.nav-tabs .nav-link {
+  cursor: pointer; }
+
+.form-search-group {
+  margin-bottom: unset;
+  margin-left: 15px; }
+
+.table-history > tr > th {
+  font-size: 1.2em !important; }
+
+.daterangepicker td.in-range {
+  background-color: #e4f4e8 !important; }
+
+.daterangepicker td.active, .daterangepicker td.active:hover {
+  background-color: #28a745 !important; }
+
+.daterangepicker td.off {
+  background-color: unset !important; }
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.btn-primary:not(:disabled):not(.disabled).active:focus,
+.btn-primary:active:hover,
+.btn-primary.active:hover,
+.show > .btn-primary.dropdown-toggle,
+.show > .btn-primary.dropdown-toggle:focus,
+.show > .btn-primary.dropdown-toggle:hover,
+.form-inline > .btn,
+.form-inline > .btn:hover,
+form button.btn-secondary,
+form button.btn-secondary:hover {
+  background-color: #28a745; }
+
+.badge {
+  font-size: 90%; }
+
+.btn-outline-success, .dropdown-outline-success {
+  background-color: #fff;
+  color: #28a745;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #28a745; }
+
+.btn-outline-success:hover, .dropdown-outline-success:hover {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745; }
+
+.btn-log {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%); }

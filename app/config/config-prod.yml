@@ -1,0 +1,14 @@
+telegram:
+  id: 1
+  hash: ""
+  username: ""
+  session_path: /usr/local/tgui/telethon/state
+instagram:
+  session_path: "/usr/local/tgui/instagram/state"
+vk:
+  session_path: "/usr/local/tgui/vk/state"
+app:
+  downloads_location: "/usr/local/tgui/downloads"
+  backend_url: "http://ui:9000"
+  parse_sleep_sec: 30
+  iter_counter_deep: 100
