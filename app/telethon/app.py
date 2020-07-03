@@ -4,7 +4,6 @@ from os.path import isdir, isfile, join, splitext
 from distutils.dir_util import mkpath, remove_tree
 from telethon import TelegramClient, sync, events
 from telethon.tl.types import PeerChannel, MessageMediaWebPage, MessageMediaPhoto, Photo, MessageMediaDocument, Document
-import redis
 import json
 import re
 from aiostream import stream

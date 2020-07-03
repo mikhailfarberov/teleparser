@@ -32,7 +32,6 @@ RUN cd /tmp/app/fe && \
 
 # build be
 ADD ./app/be /usr/local/tgui/be
-ADD ./migration /usr/local/tgui/migration
 ADD ./app/config /usr/local/tgui/config
 COPY ./app/run_app_ui.sh /usr/local/tgui
 COPY ./app/nginx.conf /etc/nginx

@@ -112,8 +112,10 @@ while (1) {
     $totalSavedItems = 0;
     $maxDepth = 10;
     $accounts = get_accounts();
-    if (!$accounts || !count($accounts))
+    if (!$accounts || !count($accounts)) {
+        sleep(60);
         continue;
+    }
     foreach ($accounts as $account) {
         try {
             $username = $account['username'];

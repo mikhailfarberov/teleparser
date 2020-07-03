@@ -69,17 +69,9 @@ def publish_message(id, text, date, media, channel_id, feed_id, feed_name, feed_
 
                 # Send new data
                 resp = requests.models.Response()
-                req = ''
-                if feed_name == 'feed':
-                    # Post to a feed
-                    req = json.dumps({'files': files, 'text': text, 'time': date, 'user_name': feed_username, 'type': 'post'})
-                    resp = requests.post(api_url + 'addContent', req, headers={'Content-type': 'application/json'})
-                    print('[' + datetime.now().strftime("%d/%m/%Y %H:%M:%S") + '] URL: ' + api_url + ', user: ' + feed_username + ', post to the feed from ' + feed_desc + ' (with ' + str(len(files)) + '/' + str(len(media)) + ' files)')
-                else:
-                    # Post to a channel
-                    req = json.dumps({'files': files, 'text': text, 'time': date, 'user_name': feed_username, 'type': 'channel', 'chat_name': feed_name})
-                    resp = requests.post(api_url + 'addContent', req, headers={'Content-type': 'application/json'})
-                    print('[' + datetime.now().strftime("%d/%m/%Y %H:%M:%S") + '] URL: ' + api_url + ', user: ' + feed_username + ', channel: ' + feed_name + ' (with ' + str(len(files)) + '/' + str(len(media)) + ' files)')
+                req = json.dumps({'files': files, 'text': text, 'time': date, 'user_name': feed_username, 'type': 'channel', 'chat_name': feed_name})
+                resp = requests.post(api_url + 'addContent', req, headers={'Content-type': 'application/json'})
+                print('[' + datetime.now().strftime("%d/%m/%Y %H:%M:%S") + '] URL: ' + api_url + ', user: ' + feed_username + ', channel: ' + feed_name + ' (with ' + str(len(files)) + '/' + str(len(media)) + ' files)')
 
                 if resp.status_code != 200:
                     print('********************************************************** addContent')
