@@ -53,7 +53,7 @@ class Sidebar extends React.Component {
                 activeClassName="active"
               >
                 <i className={"now-ui-icons ui-1_settings-gear-63"} />
-                <p>Конфиг</p>
+                <p>Configuration</p>
               </NavLink>
             </li>
             <li
@@ -68,7 +68,7 @@ class Sidebar extends React.Component {
                 activeClassName="active"
               >
                 <i className={"now-ui-icons users_single-02"} />
-                <p>Аккаунты</p>
+                <p>Accounts</p>
               </NavLink>
             </li>
             <li
@@ -83,7 +83,7 @@ class Sidebar extends React.Component {
                 activeClassName="active"
               >
                 <i className={"now-ui-icons ui-1_simple-add"} />
-                <p>Источники</p>
+                <p>Channels</p>
               </NavLink>
             </li>
             <li
@@ -98,7 +98,7 @@ class Sidebar extends React.Component {
                 activeClassName="active"
               >
                 <i className={"now-ui-icons objects_spaceship"} />
-                <p>Каналы</p>
+                <p>Feeds</p>
               </NavLink>
             </li>
           </Nav>

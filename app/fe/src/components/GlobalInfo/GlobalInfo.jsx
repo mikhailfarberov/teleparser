@@ -7,6 +7,7 @@ import {
     CardBody,
     Row,
     Col,
+    ButtonGroup,
     Button,
     Modal, 
     ModalHeader, 
@@ -69,22 +70,22 @@ class GlobalInfo extends React.Component {
     }
 
     confirmEnvsDelete(e, id, label) {
-        if (window.confirm('Удалить сервер ' + label + '?'))
+        if (window.confirm('Do you wanna delete endpoint ' + label + '?'))
             this.props.deleteGlobal({"envs": [{'id': id}]})
     }
 
     confirmDropsDelete(e, id, label) {
-        if (window.confirm('Удалить фильтр ' + label + '?'))
+        if (window.confirm('Do you wanna delete filter ' + label + '?'))
             this.props.deleteGlobal({"drops": [{'id': id}]})
     }
 
     confirmReplacementsDelete(e, id, label) {
-        if (window.confirm('Удалить замену ' + label + '?'))
+        if (window.confirm('Do you wanna delete replacement ' + label + '?'))
             this.props.deleteGlobal({"replacements": [{'id': id}]})
     }
 
     confirmWhitelistDelete(e, id, label) {
-        if (window.confirm('Удалить ссылку ' + label + '?'))
+        if (window.confirm('Do you wanna delete link ' + label + '?'))
             this.props.deleteGlobal({"whitelist": [{'id': id}]})
     }
 
@@ -132,9 +133,11 @@ class GlobalInfo extends React.Component {
                         {item.url}
                     </td>
                     <td>
-                        <Button onClick={(e) => this.toggleEnvDialog(e, item.id)}>Редактировать</Button>
-                        {' '}
-                        <Button onClick={(e) => this.confirmEnvsDelete(e, item.id, item.url)} color="danger">Удалить</Button>
+                        <ButtonGroup className="pull-right">
+                            <Button onClick={(e) => this.toggleEnvDialog(e, item.id)}>Edit</Button>
+                            {' '}
+                            <Button onClick={(e) => this.confirmEnvsDelete(e, item.id, item.url)} color="danger">Delete</Button>
+                        </ButtonGroup>
                     </td>
               </tr>
             );
@@ -147,9 +150,11 @@ class GlobalInfo extends React.Component {
                         {item.expr}
                     </td>
                     <td>
-                        <Button onClick={(e) => this.toggleDropsDialog(e, item.id)}>Редактировать</Button>
-                        {' '}
-                        <Button onClick={(e) => this.confirmDropsDelete(e, item.id, item.expr)} color="danger">Удалить</Button>
+                        <ButtonGroup className="pull-right">
+                            <Button onClick={(e) => this.toggleDropsDialog(e, item.id)}>Edit</Button>
+                            {' '}
+                            <Button onClick={(e) => this.confirmDropsDelete(e, item.id, item.expr)} color="danger">Delete</Button>
+                        </ButtonGroup>
                     </td>
                 </tr>
             );
@@ -165,9 +170,11 @@ class GlobalInfo extends React.Component {
                         {item.expr_replace}
                     </td>
                     <td>
-                        <Button onClick={(e) => this.toggleReplacementsDialog(e, item.id)}>Редактировать</Button>
-                        {' '}
-                        <Button onClick={(e) => this.confirmReplacementsDelete(e, item.id, item.expr_search)} color="danger">Удалить</Button>
+                        <ButtonGroup className="pull-right">
+                            <Button onClick={(e) => this.toggleReplacementsDialog(e, item.id)}>Edit</Button>
+                            {' '}
+                            <Button onClick={(e) => this.confirmReplacementsDelete(e, item.id, item.expr_search)} color="danger">Delete</Button>
+                        </ButtonGroup>
                     </td>
                 </tr>
             );
@@ -180,9 +187,11 @@ class GlobalInfo extends React.Component {
                         {item.url}
                     </td>
                     <td>
-                        <Button onClick={(e) => this.toggleWhitelistDialog(e, item.id)}>Редактировать</Button>
-                        {' '}
-                        <Button onClick={(e) => this.confirmWhitelistDelete(e, item.id, item.url)} color="danger">Удалить</Button>
+                        <ButtonGroup className="pull-right">
+                            <Button onClick={(e) => this.toggleWhitelistDialog(e, item.id)}>Edit</Button>
+                            {' '}
+                            <Button onClick={(e) => this.confirmWhitelistDelete(e, item.id, item.url)} color="danger">Delete</Button>
+                        </ButtonGroup>
                     </td>
                 </tr>
             );
@@ -196,14 +205,14 @@ class GlobalInfo extends React.Component {
                     <Col xs={12}>
                         <Card>
                             <CardHeader>
-                                <Button color="info" className="float-right" onClick={(e) => this.toggleEnvDialog(e, 0)}>Добавить сервер</Button>
-                                <CardTitle tag="h6">Сервера Sendy</CardTitle>
+                                <Button color="info" className="float-right" onClick={(e) => this.toggleEnvDialog(e, 0)}>Add</Button>
+                                <CardTitle tag="h6">Publishing endpoints</CardTitle>
                             </CardHeader>
                             <CardBody>
                                 <Table bordered>
                                     <thead className="text-primary">
                                         <tr>
-                                            <th>Сервер</th>
+                                            <th>Endpoint</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -217,14 +226,14 @@ class GlobalInfo extends React.Component {
                     <Col xs={12}>
                         <Card>
                             <CardHeader>
-                                <Button color="info" className="float-right" onClick={(e) => this.toggleDropsDialog(e, 0)}>Добавить правило</Button>
-                                <CardTitle tag="h6">Фильтры</CardTitle>
+                                <Button color="info" className="float-right" onClick={(e) => this.toggleDropsDialog(e, 0)}>Add</Button>
+                                <CardTitle tag="h6">Filters</CardTitle>
                             </CardHeader>
                             <CardBody>
                                 <Table bordered>
                                     <thead className="text-primary">
                                         <tr>
-                                            <th>Правило</th>
+                                            <th>Filter</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -238,15 +247,15 @@ class GlobalInfo extends React.Component {
                     <Col xs={12}>
                         <Card>
                             <CardHeader>
-                                <Button color="info" className="float-right" onClick={(e) => this.toggleReplacementsDialog(e, 0)}>Добавить правило</Button>
-                                <CardTitle tag="h6">Замены</CardTitle>
+                                <Button color="info" className="float-right" onClick={(e) => this.toggleReplacementsDialog(e, 0)}>Add</Button>
+                                <CardTitle tag="h6">Replacements</CardTitle>
                             </CardHeader>
                             <CardBody>
                                 <Table bordered>
                                     <thead className="text-primary">
                                         <tr>
-                                            <th>Правило</th>
-                                            <th>Замена</th>
+                                            <th>Search</th>
+                                            <th>Replace</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -260,14 +269,14 @@ class GlobalInfo extends React.Component {
                     <Col xs={12}>
                         <Card>
                             <CardHeader>
-                                <Button color="info" className="float-right" onClick={(e) => this.toggleWhitelistDialog(e, 0)}>Добавить правило</Button>
-                                <CardTitle tag="h6">Белый список</CardTitle>
+                                <Button color="info" className="float-right" onClick={(e) => this.toggleWhitelistDialog(e, 0)}>Add</Button>
+                                <CardTitle tag="h6">White source</CardTitle>
                             </CardHeader>
                             <CardBody>
                                 <Table bordered>
                                     <thead className="text-primary">
                                         <tr>
-                                            <th>Ссылка</th>
+                                            <th>Link</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -278,71 +287,71 @@ class GlobalInfo extends React.Component {
                     </Col>
                 </Row>
                 <Modal isOpen={this.props.global.modals.envs} toggle={this.toggleEnvDialog}>
-                    <ModalHeader toggle={this.toggleEnvDialog}>Добавление сервера</ModalHeader>
+                    <ModalHeader toggle={this.toggleEnvDialog}>Edit endpoint</ModalHeader>
                     <ModalBody>
                         <Form>
                             <Input type="hidden" name="id" value={(this.props.global.active.envs) ? this.props.global.active.envs.id:0} innerRef={node => (this.formEnvsId = node)} id="formEnvsId" />
                             <FormGroup>
-                                <Label for="formEnvsUrl">Адрес</Label>
-                                <Input type="text" name="url" defaultValue={(this.props.global.active.envs) ? this.props.global.active.envs.url:''} innerRef={node => (this.formEnvsUrl = node)} id="formEnvsUrl" placeholder="https://sendy.social" />
+                                <Label for="formEnvsUrl">URL</Label>
+                                <Input type="text" name="url" defaultValue={(this.props.global.active.envs) ? this.props.global.active.envs.url:''} innerRef={node => (this.formEnvsUrl = node)} id="formEnvsUrl" placeholder="https://" />
                             </FormGroup>
                         </Form>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.submitEnvsHandler}>Сохранить</Button>{' '}
-                        <Button color="secondary" onClick={this.toggleEnvDialog}>Отмена</Button>
+                        <Button color="primary" onClick={this.submitEnvsHandler}>Save</Button>{' '}
+                        <Button color="secondary" onClick={this.toggleEnvDialog}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
                 <Modal isOpen={this.props.global.modals.drops} toggle={this.toggleDropsDialog}>
-                    <ModalHeader toggle={this.toggleDropsDialog}>Добавление правила фильтрации</ModalHeader>
+                    <ModalHeader toggle={this.toggleDropsDialog}>Edit filter</ModalHeader>
                     <ModalBody>
                         <Form>
                             <Input type="hidden" name="id" value={(this.props.global.active.drops) ? this.props.global.active.drops.id:0} innerRef={node => (this.formDropsId = node)} id="formDropsId" />
                             <FormGroup>
-                                <Label for="formDropsExpr">Поиск</Label>
-                                <Input type="text" name="expr" defaultValue={(this.props.global.active.drops) ? this.props.global.active.drops.expr:''} innerRef={node => (this.formDropsExpr = node)} id="formDropsExpr" placeholder="*поиск*" />
+                                <Label for="formDropsExpr">Filter</Label>
+                                <Input type="text" name="expr" defaultValue={(this.props.global.active.drops) ? this.props.global.active.drops.expr:''} innerRef={node => (this.formDropsExpr = node)} id="formDropsExpr" placeholder="*wildcard*" />
                             </FormGroup>
                         </Form>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.submitDropsHandler}>Сохранить</Button>{' '}
-                        <Button color="secondary" onClick={this.toggleDropsDialog}>Отмена</Button>
+                        <Button color="primary" onClick={this.submitDropsHandler}>Save</Button>{' '}
+                        <Button color="secondary" onClick={this.toggleDropsDialog}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
                 <Modal isOpen={this.props.global.modals.replacements} toggle={this.toggleReplacementsDialog}>
-                    <ModalHeader toggle={this.toggleReplacementsDialog}>Добавление правила замены</ModalHeader>
+                    <ModalHeader toggle={this.toggleReplacementsDialog}>Edit replacement</ModalHeader>
                     <ModalBody>
                         <Form>
                             <Input type="hidden" name="id" value={(this.props.global.active.replacements) ? this.props.global.active.replacements.id:0} innerRef={node => (this.formReplacementsId = node)} id="formReplacementsId" />
                             <FormGroup>
-                                <Label for="formReplacementsExprSearch">Поиск</Label>
-                                <Input type="text" name="expr_search" defaultValue={(this.props.global.active.replacements) ? this.props.global.active.replacements.expr_search:''} innerRef={node => (this.formReplacementsExprSearch = node)} id="formReplacementsExprSearch" placeholder="что ищем" />
+                                <Label for="formReplacementsExprSearch">Search</Label>
+                                <Input type="text" name="expr_search" defaultValue={(this.props.global.active.replacements) ? this.props.global.active.replacements.expr_search:''} innerRef={node => (this.formReplacementsExprSearch = node)} id="formReplacementsExprSearch" placeholder="search" />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="formReplacementsExprReplace">Замена</Label>
-                                <Input type="text" name="expr_replace" defaultValue={(this.props.global.active.replacements) ? this.props.global.active.replacements.expr_replace:''} innerRef={node => (this.formReplacementsExprReplace = node)} id="formReplacementsExprReplace" placeholder="на что заменяем" />
+                                <Label for="formReplacementsExprReplace">Replacement</Label>
+                                <Input type="text" name="expr_replace" defaultValue={(this.props.global.active.replacements) ? this.props.global.active.replacements.expr_replace:''} innerRef={node => (this.formReplacementsExprReplace = node)} id="formReplacementsExprReplace" placeholder="replace" />
                             </FormGroup>
                         </Form>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.submitReplacementsHandler}>Сохранить</Button>{' '}
-                        <Button color="secondary" onClick={this.toggleReplacementsDialog}>Отмена</Button>
+                        <Button color="primary" onClick={this.submitReplacementsHandler}>Save</Button>{' '}
+                        <Button color="secondary" onClick={this.toggleReplacementsDialog}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
                 <Modal isOpen={this.props.global.modals.whitelist} toggle={this.toggleWhitelistDialog}>
-                    <ModalHeader toggle={this.toggleWhitelistDialog}>Добавление в белый список</ModalHeader>
+                    <ModalHeader toggle={this.toggleWhitelistDialog}>Edit white list</ModalHeader>
                     <ModalBody>
                         <Form>
                             <Input type="hidden" name="id" value={(this.props.global.active.whitelist) ? this.props.global.active.whitelist.id:0} innerRef={node => (this.formWhitelistId = node)} id="formWhitelistId" />
                             <FormGroup>
-                                <Label for="formWhitelistUrl">Ссылка</Label>
-                                <Input type="text" name="url" defaultValue={(this.props.global.active.whitelist) ? this.props.global.active.whitelist.url:''} innerRef={node => (this.formWhitelistUrl = node)} id="formWhitelistUrl" placeholder="https://sendy.social" />
+                                <Label for="formWhitelistUrl">Url</Label>
+                                <Input type="text" name="url" defaultValue={(this.props.global.active.whitelist) ? this.props.global.active.whitelist.url:''} innerRef={node => (this.formWhitelistUrl = node)} id="formWhitelistUrl" placeholder="https://" />
                             </FormGroup>
                         </Form>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.submitWhitelistHandler}>Сохранить</Button>{' '}
-                        <Button color="secondary" onClick={this.toggleWhitelistDialog}>Отмена</Button>
+                        <Button color="primary" onClick={this.submitWhitelistHandler}>Save</Button>{' '}
+                        <Button color="secondary" onClick={this.toggleWhitelistDialog}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
             </div>
