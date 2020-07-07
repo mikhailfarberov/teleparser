@@ -7,6 +7,7 @@ import {
     CardBody,
     Row,
     Col,
+    ButtonGroup,
     Button,
     Modal, 
     ModalHeader, 
@@ -70,7 +71,7 @@ class FeedInfo extends React.Component {
     }
 
     confirmFeedDelete(e, id, label) {
-        if (window.confirm('Удалить канал ' + label + '?'))
+        if (window.confirm('Do you wanne delete feed ' + label + '?'))
             this.props.deleteFeed(id)
     }
 
@@ -110,8 +111,8 @@ class FeedInfo extends React.Component {
     }
 
     render() {
-        const platforms = {'tg': 'Телеграм', 'ig': 'Инстаграм', 'vk': 'ВК'}
-        const modes = {'manual': 'Вручную', 'auto': 'Автоматически', 'timetable': 'По расписанию'}
+        const platforms = {'tg': 'Telegram', 'ig': 'Instagram', 'vk': 'VK'}
+        const modes = {'manual': 'Manually', 'auto': 'Immediately', 'timetable': 'By timetable'}
 
         const feedList = (this.props.feeds.data.feeds) ? this.props.feeds.data.feeds.map((item) => {
             return (
@@ -119,11 +120,13 @@ class FeedInfo extends React.Component {
                     <td>{item.name}</td>
                     <td>{item.username}</td>
                     <td>{modes[item.publish_mode]}</td>
-                    <td>{(item.sync) ? 'Публикуется':'Остановлено'}</td>
+                    <td>{(item.sync) ? 'On':'Off'}</td>
                     <td>
-                        <Button onClick={(e) => this.toggleFeedDialog(e, item.id)}>Редактировать</Button>
-                        {' '}
-                        <Button onClick={(e) => this.confirmFeedDelete(e, item.id, item.name)} color="danger">Удалить</Button>
+                        <ButtonGroup className="pull-right">
+                            <Button onClick={(e) => this.toggleFeedDialog(e, item.id)}>Edit</Button>
+                            {' '}
+                            <Button onClick={(e) => this.confirmFeedDelete(e, item.id, item.name)} color="danger">Delete</Button>
+                        </ButtonGroup>
                     </td>
                 </tr>
             );
@@ -149,17 +152,17 @@ class FeedInfo extends React.Component {
                     <Col xs={12}>
                         <Card>
                             <CardHeader>
-                                <Button color="info" className="float-right" onClick={(e) => this.toggleFeedDialog(e, 0)}>Добавить канал</Button>
-                                <CardTitle tag="h6">Каналы</CardTitle>
+                                <Button color="info" className="float-right" onClick={(e) => this.toggleFeedDialog(e, 0)}>Add</Button>
+                                <CardTitle tag="h6">Feeds</CardTitle>
                             </CardHeader>
                             <CardBody>
                                 <Table bordered>
                                     <thead className="text-primary">
                                         <tr>
-                                            <th>Название</th>
-                                            <th>Пользователь</th>
-                                            <th>Режим публикации</th>
-                                            <th>Статус</th>
+                                            <th>Title</th>
+                                            <th>Username</th>
+                                            <th>Mode</th>
+                                            <th>Publishing</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -170,35 +173,35 @@ class FeedInfo extends React.Component {
                     </Col>
                 </Row>
                 <Modal isOpen={this.props.feeds.modals.feeds} toggle={this.toggleFeedDialog}>
-                    <ModalHeader toggle={this.toggleFeedDialog}>Управление каналом</ModalHeader>
+                    <ModalHeader toggle={this.toggleFeedDialog}>Edit feed</ModalHeader>
                     <ModalBody>
                         <Form>
                             <Input type="hidden" name="id" value={(this.props.feeds.active.feeds) ? this.props.feeds.active.feeds.id:0} innerRef={node => (this.formFeedId = node)} id="formFeedId" />
                             <FormGroup>
-                                <Label for="formFeedName">Название</Label>
+                                <Label for="formFeedName">Title</Label>
                                 <Input type="text" name="name" defaultValue={(this.props.feeds.active.feeds) ? this.props.feeds.active.feeds.name:''} innerRef={node => (this.formFeedName = node)} id="formFeedName" placeholder="" />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="formFeedName">Описание</Label>
+                                <Label for="formFeedName">Description</Label>
                                 <Input type="textarea" name="desc" defaultValue={(this.props.feeds.active.feeds) ? this.props.feeds.active.feeds.desc:''} innerRef={node => (this.formFeedDesc = node)} id="formFeedDesc" placeholder="" />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="formFeedName">Пользователь</Label>
+                                <Label for="formFeedName">Username</Label>
                                 <Input type="text" name="username" defaultValue={(this.props.feeds.active.feeds) ? this.props.feeds.active.feeds.username:''} innerRef={node => (this.formFeedUsername = node)} id="formFeedUsername" placeholder="" />
                             </FormGroup>
                             <FormGroup>
-                                <CustomInput type="switch" defaultChecked={(this.props.feeds.active.feeds) ? this.props.feeds.active.feeds.sync:1} id="formFeedSync" name="sync" innerRef={node => (this.formFeedSync = node)} label="Публиковать" />
+                                <CustomInput type="switch" defaultChecked={(this.props.feeds.active.feeds) ? this.props.feeds.active.feeds.sync:1} id="formFeedSync" name="sync" innerRef={node => (this.formFeedSync = node)} label="Publishing" />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="formFeedPublishMode">Режим публикации</Label>
+                                <Label for="formFeedPublishMode">Mode</Label>
                                 <Input type="select" name="publish_mode" defaultValue={(this.props.feeds.active.feeds) ? this.props.feeds.active.feeds.publish_mode:''} innerRef={node => (this.formFeedPublishMode = node)} id="formFeedPublishMode" placeholder="">
-                                    <option value="manual">Ручной</option>
-                                    <option value="auto">Авто</option>
-                                    <option value="timetable">Расписание</option>
+                                    <option value="manual">Manualy</option>
+                                    <option value="auto">Immediately</option>
+                                    <option value="timetable">By timetable</option>
                                 </Input>
                             </FormGroup>
                             <FormGroup>
-                                <Label for="formFeedTimeFrom">Период публикации</Label>
+                                <Label for="formFeedTimeFrom">Timetable interval</Label>
                                 <Row>
                                     <Col sm={3}>
                                         <Input type="number" size={2} name="time_from" defaultValue={(this.props.feeds.active.feeds) ? this.props.feeds.active.feeds.time_from:''} innerRef={node => (this.formFeedTimeFrom = node)} id="formFeedTimeFrom" placeholder="чч" />
@@ -210,7 +213,7 @@ class FeedInfo extends React.Component {
                                 </Row>
                             </FormGroup>
                             <FormGroup>
-                                <Label for="formFeedIntervalFrom">Частота публикации</Label>
+                                <Label for="formFeedIntervalFrom">Timetable period</Label>
                                 <Row>
                                     <Col sm={3}>
                                         <Input type="text" size={2} name="interval_from" defaultValue={(this.props.feeds.active.feeds) ? this.props.feeds.active.feeds.interval_from:''} innerRef={node => (this.formFeedIntervalFrom = node)} id="formFeedTimeFrom" placeholder="чч" />
@@ -222,13 +225,13 @@ class FeedInfo extends React.Component {
                                 </Row>
                             </FormGroup>
                             <FormGroup>
-                                <Label for="formFeedEnvs">Сервера Sendy</Label>
+                                <Label for="formFeedEnvs">Publishing ednpoints</Label>
                                 <Input type="select" name="envs" defaultValue={(this.props.feeds.active.feeds) ? this.props.feeds.active.feeds.envs:[]} innerRef={node => (this.formFeedEnvs = node)} id="formFeedEnvs" placeholder="" multiple>
                                     {envList}
                                 </Input>
                             </FormGroup>
                             <FormGroup>
-                                <Label for="formFeedEnvs">Источники</Label>
+                                <Label for="formFeedEnvs">Channels</Label>
                                 <Input type="select" name="channels" defaultValue={(this.props.feeds.active.feeds) ? this.props.feeds.active.feeds.channels:[]} innerRef={node => (this.formFeedChannels = node)} id="formFeedChannels" placeholder="" multiple>
                                     {channelList}
                                 </Input>
@@ -236,8 +239,8 @@ class FeedInfo extends React.Component {
                         </Form>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.submitFeedHandler}>Сохранить</Button>{' '}
-                        <Button color="secondary" onClick={this.toggleFeedDialog}>Отмена</Button>
+                        <Button color="primary" onClick={this.submitFeedHandler}>Save</Button>{' '}
+                        <Button color="secondary" onClick={this.toggleFeedDialog}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
             </div>

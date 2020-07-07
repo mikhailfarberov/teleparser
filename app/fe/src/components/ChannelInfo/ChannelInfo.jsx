@@ -7,6 +7,7 @@ import {
     CardBody,
     Row,
     Col,
+    ButtonGroup,
     Button,
     Modal, 
     ModalHeader, 
@@ -183,17 +184,19 @@ class ChannelInfo extends React.Component {
     }
 
     render() {
-        const platforms = {'tg': 'Телеграм', 'ig': 'Инстаграм', 'vk': 'ВК'}
+        const platforms = {'tg': 'Telegram', 'ig': 'Instagram', 'vk': 'VK'}
         const channelList = (this.props.channels.data.channels) ? this.props.channels.data.channels.map((item) => {
             return (
                 <tr key={item.id}>
                     <td>{platforms[item.source]}</td>
                     <td>{item.name}</td>
-                    <td>{(item.moderation) ? 'Модерация':'Без модерации'}</td>
+                    <td>{(item.moderation) ? 'Moderated':'Not moderated'}</td>
                     <td>
-                        <Button onClick={(e) => this.toggleChannelDialog(e, item.id)}>Редактировать</Button>
-                        {' '}
-                        <Button href={"/messages/"+item.id} color="info" >Посты</Button>
+                        <ButtonGroup className="pull-right">
+                            <Button onClick={(e) => this.toggleChannelDialog(e, item.id)}>Edit</Button>
+                            {' '}
+                            <Button href={"/messages/"+item.id} color="info" >Posts</Button>
+                        </ButtonGroup>
                     </td>
                     <td>{item.cmt}</td>
                 </tr>
@@ -204,7 +207,7 @@ class ChannelInfo extends React.Component {
             return (
                     <Row>
                         <Col sm={10}>
-                            <Input defaultValue={item.expr} placeholder="*поиск*" onChange={(e) => {this.editChannelDrops(e, item.id, 'expr')}} />
+                            <Input defaultValue={item.expr} placeholder="*wildcard*" onChange={(e) => {this.editChannelDrops(e, item.id, 'expr')}} />
                         </Col>
                         <Col sm={2}>
                             <Button size="sm" color="danger" onClick={(e) => {this.removeChannelDrops(item.id)}}><i className={"now-ui-icons ui-1_simple-remove"} /></Button>
@@ -216,11 +219,11 @@ class ChannelInfo extends React.Component {
             return (
                     <Row>
                         <Col sm={5}>
-                            <Input defaultValue={item.expr_search} placeholder="Что ищем" onChange={(e) => {this.editChannelReplacements(e, item.id, 'expr_search')}} />
+                            <Input defaultValue={item.expr_search} placeholder="search" onChange={(e) => {this.editChannelReplacements(e, item.id, 'expr_search')}} />
                         </Col>
                         {' '}
                         <Col sm={5}>
-                            <Input defaultValue={item.expr_replace} placeholder="На что заменяем" onChange={(e) => {this.editChannelReplacements(e, item.id, 'expr_replace')}} />
+                            <Input defaultValue={item.expr_replace} placeholder="replace" onChange={(e) => {this.editChannelReplacements(e, item.id, 'expr_replace')}} />
                         </Col>
                         <Col sm={2}>
                             <Button size="sm" color="danger" onClick={(e) => {this.removeChannelReplacements(item.id)}}><i className={"now-ui-icons ui-1_simple-remove"} /></Button>
@@ -232,7 +235,7 @@ class ChannelInfo extends React.Component {
             return (
                     <Row>
                         <Col sm={10}>
-                            <Input defaultValue={item.url} placeholder="ссылка" onChange={(e) => {this.editChannelWhitelist(e, item.id, 'url')}} />
+                            <Input defaultValue={item.url} placeholder="link" onChange={(e) => {this.editChannelWhitelist(e, item.id, 'url')}} />
                         </Col>
                         <Col sm={2}>
                             <Button size="sm" color="danger" onClick={(e) => {this.removeChannelWhitelist(item.id)}}><i className={"now-ui-icons ui-1_simple-remove"} /></Button>
@@ -249,16 +252,16 @@ class ChannelInfo extends React.Component {
                     <Col xs={12}>
                         <Card>
                             <CardHeader>
-                                <CardTitle tag="h6">Источники</CardTitle>
+                                <CardTitle tag="h6">Channels</CardTitle>
                             </CardHeader>
                             <CardBody>
                                 <Table bordered>
                                     <thead className="text-primary">
                                         <tr>
-                                            <th>Платформа</th>
-                                            <th>Название</th>
-                                            <th>Модерация</th>
-                                            <th>Комментарий</th>
+                                            <th>Source</th>
+                                            <th>Title</th>
+                                            <th>Moderated</th>
+                                            <th>Description</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -269,20 +272,20 @@ class ChannelInfo extends React.Component {
                     </Col>
                 </Row>
                 <Modal isOpen={this.props.channels.modals.channels} toggle={this.toggleChannelDialog}>
-                    <ModalHeader toggle={this.toggleChannelDialog}>Управление источником</ModalHeader>
+                    <ModalHeader toggle={this.toggleChannelDialog}>Edit channel</ModalHeader>
                     <ModalBody>
                         <Form>
                             <Input type="hidden" name="id" value={(this.props.channels.active.channels) ? this.props.channels.active.channels.id:0} innerRef={node => (this.formChannelId = node)} id="formChannelId" />
                             <Input type="hidden" name="source" value={(this.props.channels.active.channels) ? this.props.channels.active.channels.source:''} innerRef={node => (this.formChannelSource = node)} id="formChannelSource" />
                             <FormGroup>
-                                <CustomInput type="switch" defaultChecked={(this.props.channels.active.channels) ? this.props.channels.active.channels.moderation:1} id="formChannelModeration" name="moderation" innerRef={node => (this.formChannelModeration = node)} label="Модерация" />
+                                <CustomInput type="switch" defaultChecked={(this.props.channels.active.channels) ? this.props.channels.active.channels.moderation:1} id="formChannelModeration" name="moderation" innerRef={node => (this.formChannelModeration = node)} label="Moderation" />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="formChannelCmt">Комментарий</Label>
+                                <Label for="formChannelCmt">Description</Label>
                                 <Input type="textarea" name="cmt" defaultValue={(this.props.channels.active.channels) ? this.props.channels.active.channels.cmt:''} innerRef={node => (this.formChannelCmt = node)} id="formChannelCmt" placeholder="" />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="formChannelDrops">Фильтры</Label>
+                                <Label for="formChannelDrops">Filters</Label>
                                 {dropsList}
                                 <Row>
                                     <Col sm={12}>
@@ -291,7 +294,7 @@ class ChannelInfo extends React.Component {
                                 </Row>
                             </FormGroup>
                             <FormGroup>
-                                <Label for="formChannelReplacements">Замены</Label>
+                                <Label for="formChannelReplacements">Replacements</Label>
                                 {replacementsList}
                                 <Row>
                                     <Col sm={12}>
@@ -300,7 +303,7 @@ class ChannelInfo extends React.Component {
                                 </Row>
                             </FormGroup>
                             <FormGroup>
-                                <Label for="formChannelWhitelist">Белый список</Label>
+                                <Label for="formChannelWhitelist">White list</Label>
                                 {whitelistList}
                                 <Row>
                                     <Col sm={12}>
@@ -312,17 +315,17 @@ class ChannelInfo extends React.Component {
                                 <CustomInput type="switch" defaultChecked={(this.props.channels.active.channels) ? this.props.channels.active.channels.watermark_used:0} id="formChannelWatermarkUsed" name="watermark_used" innerRef={node => (this.formChannelWatermarkUsed = node)} label="Watermark" />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="formChannelWatermarkOrient">Положение watermark</Label>
+                                <Label for="formChannelWatermarkOrient">Watermark position</Label>
                                 <Input type="select" name="watermark_orient" defaultValue={(this.props.channels.active.channels) ? this.props.channels.active.channels.watermark_orient:'center'} innerRef={node => (this.formChannelWatermarkOrient = node)} id="formChannelWatermarkOrient" placeholder="">
-                                    <option value="center">Центр</option>
-                                    <option value="top-left">Верх слева</option>
-                                    <option value="top-right">Верх справа</option>
-                                    <option value="bottom-left">Низ слева</option>
-                                    <option value="bottom-right">Низ справа</option>
+                                    <option value="center">Center</option>
+                                    <option value="top-left">Top left</option>
+                                    <option value="top-right">Top right</option>
+                                    <option value="bottom-left">Bottom left</option>
+                                    <option value="bottom-right">Bottom right</option>
                                 </Input>
                             </FormGroup>
                             <FormGroup>
-                                <Label for="formChannelWidth">Размер watermark</Label>
+                                <Label for="formChannelWidth">Watermark size (px)</Label>
                                 <Row>
                                     <Col sm={3}>
                                         <Input type="number" size={2} name="watermark_width" defaultValue={(this.props.channels.active.channels) ? this.props.channels.active.channels.watermark_width:''} innerRef={node => (this.formChannelWatermarkWidth = node)} id="formChannelWatermarkWidth" placeholder="px" />
@@ -334,18 +337,18 @@ class ChannelInfo extends React.Component {
                                 </Row>
                             </FormGroup>
                             <FormGroup>
-                                <Label for="formChannelWatermarkMethod">Метод удаления watermark</Label>
+                                <Label for="formChannelWatermarkMethod">Watermark deletion method</Label>
                                 <Input type="select" name="watermark_method" defaultValue={(this.props.channels.active.channels) ? this.props.channels.active.channels.watermark_method:'blur'} innerRef={node => (this.formChannelWatermarkMethod = node)} id="formChannelWatermarkMethod" placeholder="">
-                                    <option value="inpaint">Размытие</option>
-                                    <option value="cut">Обрезка</option>
-                                    <option value="scale">Масштабирование</option>
+                                    <option value="inpaint">Inpaint</option>
+                                    <option value="cut">Cut</option>
+                                    <option value="scale">Scale</option>
                                 </Input>
                             </FormGroup>
                         </Form>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.submitChannelHandler}>Сохранить</Button>{' '}
-                        <Button color="secondary" onClick={this.toggleChannelDialog}>Отмена</Button>
+                        <Button color="primary" onClick={this.submitChannelHandler}>Save</Button>{' '}
+                        <Button color="secondary" onClick={this.toggleChannelDialog}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
             </div>

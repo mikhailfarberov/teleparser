@@ -73,7 +73,7 @@ class MessagesInfo extends React.Component {
     }
 
     setFiltered(id, val) {
-        if (window.confirm((val) ? 'Отфильтровать выбранный пост?':'Вернуть выбранный пост к публикации?'))
+        if (window.confirm((val) ? 'Do you wanna filter the selected post?':'Do you wanna move the selected post to queue?'))
             this.props.updateMessage(
                 this.props.match.params.channelId,
                 id,
@@ -86,7 +86,7 @@ class MessagesInfo extends React.Component {
     }
 
     setManual(id) {
-        if (window.confirm('Опубликовать выбранный пост в ручном режиме?'))
+        if (window.confirm('Do you wanna publish the selected post manually?'))
             this.props.updateMessage(
                 this.props.match.params.channelId,
                 id,
@@ -99,7 +99,7 @@ class MessagesInfo extends React.Component {
     }
 
     setModerated(id) {
-        if (window.confirm('Разрешить публикацию выбранного поста?'))
+        if (window.confirm('Do you wanna allow the selected post?'))
             this.props.updateMessage(
                 this.props.match.params.channelId,
                 id,
@@ -189,9 +189,9 @@ class MessagesInfo extends React.Component {
                         {pubList(msg.publications)}
                     </td>
                     <td>
-                        {(tab == "new") ? (<><Button onClick={(e) => this.setManual(msg.id)}>Опубликовать</Button>{' '}<Button color="danger" onClick={(e) => this.setFiltered(msg.id, 1)}>Фильтровать</Button></>):''}
-                        {(tab == "moderated") ? (<Button color="success" onClick={(e) => this.setModerated(msg.id)}>Разрешить</Button>):''}
-                        {(tab == "filtered") ? (<Button color="success" onClick={(e) => this.setFiltered(msg.id, 0)}>Вернуть</Button>):''}
+                        {(tab == "new") ? (<><Button onClick={(e) => this.setManual(msg.id)}>Publish</Button>{' '}<Button color="danger" onClick={(e) => this.setFiltered(msg.id, 1)}>Filter</Button></>):''}
+                        {(tab == "moderated") ? (<Button color="success" onClick={(e) => this.setModerated(msg.id)}>Allow</Button>):''}
+                        {(tab == "filtered") ? (<Button color="success" onClick={(e) => this.setFiltered(msg.id, 0)}>Move to queue</Button>):''}
                     </td>
                 </tr>
             );
@@ -206,15 +206,15 @@ class MessagesInfo extends React.Component {
                         <Table>
                             <thead>
                                 <tr>
-                                    <th>Дата</th>
-                                    <th>Текст</th>
-                                    <th>Вложения</th>
-                                    <th>Публикации</th>
+                                    <th>Date</th>
+                                    <th>Text</th>
+                                    <th>Media</th>
+                                    <th>Published</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {(this.props.messages.data.messages.length) ? this.messagesList(tab):(<tr><td colspan="5" className="centered">нет записей</td></tr>)}
+                                {(this.props.messages.data.messages.length) ? this.messagesList(tab):(<tr><td colspan="5" className="centered">no data</td></tr>)}
                             </tbody>
                         </Table>
                     </Col>
@@ -244,14 +244,14 @@ class MessagesInfo extends React.Component {
     }
 
     render() {
-        const platforms = {'tg': 'телеграм', 'ig': 'инстаграм', 'vk': 'ВК'}
+        const platforms = {'tg': 'Telegram', 'ig': 'Instagram', 'vk': 'VK'}
 
         if (this.props.messages.data.channel !== undefined)
             return (
                 <Card>
                     <CardHeader>
                         <Container>
-                            <CardTitle tag="h4">Посты {platforms[this.props.messages.data.channel.source]} {this.props.messages.data.channel.name}</CardTitle>
+                            <CardTitle tag="h4">Posts {platforms[this.props.messages.data.channel.source]} {this.props.messages.data.channel.name}</CardTitle>
                         </Container>
                     </CardHeader>
                     <CardBody style={{"minHeight": 560}}>
@@ -261,7 +261,7 @@ class MessagesInfo extends React.Component {
                                     className={classnames({ active: this.props.messages.activeTab === 'new' })}
                                     onClick={() => { this.toggleTab('new'); }}
                                 >
-                                    Новые посты
+                                    New Posts
                                 </NavLink>
                             </NavItem>
                             <NavItem>
@@ -269,7 +269,7 @@ class MessagesInfo extends React.Component {
                                     className={classnames({ active: this.props.messages.activeTab === 'moderated' })}
                                     onClick={() => { this.toggleTab('moderated'); }}
                                 >
-                                    Модерация
+                                    Moderated
                                 </NavLink>
                             </NavItem>
                             <NavItem>
@@ -277,7 +277,7 @@ class MessagesInfo extends React.Component {
                                     className={classnames({ active: this.props.messages.activeTab === 'published' })}
                                     onClick={() => { this.toggleTab('published'); }}
                                 >
-                                    Опубликованные
+                                    Published
                                 </NavLink>
                             </NavItem>
                             <NavItem>
@@ -285,7 +285,7 @@ class MessagesInfo extends React.Component {
                                     className={classnames({ active: this.props.messages.activeTab === 'filtered' })}
                                     onClick={() => { this.toggleTab('filtered'); }}
                                 >
-                                    Отфильтрованные
+                                    Filtered
                                 </NavLink>
                             </NavItem>
                         </Nav>

@@ -146,15 +146,13 @@ async def sync_channels(channel_id):
 try:
     while True:
         accounts = get_accounts()
-        print('ACCOUNTS')
         print(accounts)
         if accounts and len(accounts):
             break
         time.sleep(60)
     account = accounts[0]
-    print(account)
     # TG
-    client = TelegramClient(cfg['telegram']['session_path'] + '/' + account['username'], account['user_id'], account['password'])
+    client = TelegramClient(cfg['telegram']['session_path'] + '/' + account['username'], 79907, '892c9230e10e130e0e41642725ec9b04')
     client.parse_mode = 'markdown'
     # events
     @client.on(events.NewMessage)
