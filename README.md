@@ -1,5 +1,7 @@
 # Teleparser - a simple utility to get content from Telegram channels, VK and Instagram pages
 
+[![DOCKER BUILD](https://img.shields.io/docker/cloud/build/mikhailfarberov/teleparser-ui?style=for-the-badge)](https://img.shields.io/docker/cloud/build/mikhailfarberov/teleparser-ui?style=for-the-badge) [![VERSION](https://img.shields.io/github/v/tag/mikhailfarberov/teleparser?label=version&sort=semver&style=for-the-badge)](https://img.shields.io/github/v/tag/mikhailfarberov/teleparser?label=version&sort=semver&style=for-the-badge)
+
 Teleparser allows you to get content from Telegram channels, VK or Instagram pages with all attached media files. Parsed content can be premoderated, filtered or replaced on-flight and then aggregated and published to any other social media account via API.
 
 The repo contains sources of Telegram, VK and Instagram parsers and UI to manage parsed data.
