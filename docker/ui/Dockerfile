@@ -15,7 +15,7 @@ RUN  yum -y install epel-release && \
      systemctl enable nginx && \
      yum clean all && \
      npm install -g n && \
-     n stable && \
+     n 10.16.0 && \
      PATH="$PATH"
 
 # create app dir
