@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: docker/ui/Dockerfile
-    image: "teleparser/ui:latest"
+    image: "mikhailfarberov/teleparser-ui:latest"
     ports:
       - "8000:80"
     volumes:
@@ -19,7 +19,7 @@ services:
     build:
       context: .
       dockerfile: docker/tg/Dockerfile
-    image: "teleparser/tg:latest"
+    image: "mikhailfarberov/teleparser-tg:latest"
     volumes:
       - "./state/telegram:/usr/local/tgui/telethon/state"
       - "./state/downloads:/usr/local/tgui/downloads"
@@ -33,7 +33,7 @@ services:
     build:
       context: .
       dockerfile: docker/ig/Dockerfile
-    image: "teleparser/ig:latest"
+    image: "mikhailfarberov/teleparser-ig:latest"
     volumes:
       - "./state/instagram:/usr/local/tgui/instagram/state"
       - "./state/downloads:/usr/local/tgui/downloads"
@@ -47,7 +47,7 @@ services:
     build:
       context: .
       dockerfile: docker/vk/Dockerfile
-    image: "teleparser/vk:latest"
+    image: "mikhailfarberov/teleparser-vk:latest"
     volumes:
       - "./state/vk:/usr/local/tgui/vk/state"
       - "./state/downloads:/usr/local/tgui/downloads"
