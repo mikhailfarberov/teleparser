@@ -5,5 +5,4 @@ state
 app/config/config-dev.yml
 app/fe/package-lock.json
 app/instagram/lib/pkg/mgp25
-*.env
 *.pyc
