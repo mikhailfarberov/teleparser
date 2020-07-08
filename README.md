@@ -190,7 +190,7 @@ Video and photo media downloads are supported.
 
 ## Credits
 
-# Special thanks to 
+Special thanks to 
 1. LonamiWebs for [Telethon project](https://github.com/LonamiWebs/Telethon)
 2. mgp25 for integration with [Instagram private API](https://github.com/mgp25/Instagram-API)
 3. creativetimofficial for [beatiful react dashboard template](https://github.com/creativetimofficial/now-ui-dashboard-react)
