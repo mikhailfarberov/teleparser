@@ -77,11 +77,9 @@ def save_message(channel_id, channel_name, msg_id, msg_text, msg_date, msg_files
             msg_text = msg_text.replace('(https://tgraph.io/file/' + url + ')', '')
 
     data = json.dumps({'channel': {'id': channel_id, 'name': channel_name}, 'id': msg_id, 'source': 'tg', 'text': msg_text, 'date': int(msg_date), 'files': msg_files, 'replace': replace}, ensure_ascii=False).encode('utf8')
-    print(data)
     resp = requests.put(cfg['app']['backend_url'] + '/messages/' + str(channel_id), data, headers={'Content-type': 'application/json'})
     if resp.status_code == 200:
         obj = json.loads(resp.text)
-        print(obj)
         return obj['new'] if (obj.get('new')) else False
     else:
         return False
@@ -146,7 +144,6 @@ async def sync_channels(channel_id):
 try:
     while True:
         accounts = get_accounts()
-        print(accounts)
         if accounts and len(accounts):
             break
         time.sleep(60)
