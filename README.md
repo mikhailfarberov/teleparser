@@ -27,7 +27,6 @@ Bitcoin: 3JbN5CL4fFP3LnNuD9kXv1PV7gv3PWFRae
    * [UI](#ui)
    * [Telegram channels parser](#telegram-channels-parser)
    * [VK pages parser](#vk-pages-parser)
-   * [Instagram pages parser](#instagram-pages-parser)
 3. [Credits](#credits)
 4. [License](#license)
 
@@ -78,16 +77,6 @@ After running it connects to API provided by UI and gets configured account cred
 To install Teleparser for VK please pull and run this image:
 ```
 docker pull mikhailfarberov/teleparser-vk
-```
-
-After running it connects to API provided by UI and gets configured account credentials and pages to parse.
-Unlike Telegram parser, you may reconfigure used accounts and parsed pages without restarting the services. Changes are applied immediately.
-
-**teleparser-ig** is an Instagram page parser.
-
-To install Teleparser for Instagram please pull and run this image:
-```
-docker pull mikhailfarberov/teleparser-ig
 ```
 
 After running it connects to API provided by UI and gets configured account credentials and pages to parse.
@@ -157,7 +146,7 @@ This feature is experimental and requires replacing of [publishing stub](https:/
 ### Telegram channels parser
 Telegram parser gets a configured account from the UI backend.
 During the first run, you need to authorize it by entering a code you get on your device.
-After that, the parser subscribes to a new message event and saves new messages with its media from the channels to DB. 
+After that, the parser subscribes to a new message event and saves new messages with its media from the channels to DB.
 When parser gets post from a channel it didn't know yet it downloads all messages from the channel.
 All pre-configured filtering and replacing, white list, and watermark rules are applied (see [UI section](#ui) for instructions).
 
@@ -176,23 +165,19 @@ Video, audio, and photo media downloads are supported.
 
 **Limitations**
 The parser sees the last 1000 posts only. That means it saves a maximum of 1000 posts for each page during the first run.
-
-### Instagram pages parser
-Unlike Telegram parser Instagram allows you to use several accounts.
-It gets configured accounts from the UI backend and then simply iterate over them. For the Instagram parser, it's necessary to specify accounts to parse because it scans each account instead of scanning your feed (see [UI section](#ui) for instructions).
+nstead of scanning your feed (see [UI section](#ui) for instructions).
 
 **Features**
 Video and photo media downloads are supported.
 
 **Limitations**
 * The parser sees the last 1000 posts only. That means it saves a maximum of 1000 posts for each page during the first run.
-* The parser uses 3rd party library to call Instagram API. This library is not presented in the repo due to a DMCA notice. But you may content the author for further consultations. 
+* The parser uses 3rd party library to call Instagram API. This library is not presented in the repo due to a DMCA notice. But you may content the author for further consultations.
 
 ## Credits
 
 Special thanks to:
 1. LonamiWebs for [Telethon project](https://github.com/LonamiWebs/Telethon)
-2. mgp25 for integration with [Instagram private API](https://github.com/mgp25/Instagram-API)
 3. creativetimofficial for [beatiful react dashboard template](https://github.com/creativetimofficial/now-ui-dashboard-react)
 
 ## License
